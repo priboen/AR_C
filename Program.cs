@@ -19,9 +19,9 @@ namespace AR_C
             }
         }
 
-        public void baca(SqlConnection conn)
+        public void baca(SqlConnection con)
         {
-            SqlCommand cmd = new SqlCommand("Select*From dbo.Produk", conn);
+            SqlCommand cmd = new SqlCommand("Select*From dbo.Produk", con);
             SqlDataReader r = cmd.ExecuteReader();
             while (r.Read())
             {
@@ -47,6 +47,15 @@ namespace AR_C
             cmd.Parameters.Add(new SqlParameter("hargaProduk", harga_produk));
             cmd.ExecuteNonQuery();
             Console.WriteLine("Data Berhasil Ditambahkan");
+        }
+
+        public void delete(string id_produk, string nama_produk, string tentang_produk, string cara_pakai, int harga_produk, SqlConnection con)
+        {
+            string str = "";
+            str = "delete from dbo.Produk where id_produk " + " = '" + id_produk + "'";
+            SqlCommand cmd = new SqlCommand(str, con);
+            cmd.ExecuteNonQuery();
+            Console.WriteLine("Data Sudah berhasil dihapus.");
         }
     }
 }
