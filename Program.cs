@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -30,6 +31,22 @@ namespace AR_C
                 }
                 Console.WriteLine();
             }
+        }
+
+        public void insert(string id_produk, string nama_produk, string tentang_produk, string cara_pakai, int harga_produk, SqlConnection con)
+        {
+            string str = "";
+            str = "insert into dbo.Produk (id_produk, nama_produk, tentang_produk, cara_pakai, harga_produk)" + "values(@idProduk, @namaProduk, @tentangProduk, @caraPakai, @hargaProduk)";
+            SqlCommand cmd = new SqlCommand(str, con);
+            cmd.CommandType = CommandType.Text;
+
+            cmd.Parameters.Add(new SqlParameter("idProduk", id_produk));
+            cmd.Parameters.Add(new SqlParameter("namaProduk", nama_produk));
+            cmd.Parameters.Add(new SqlParameter("tentangProduk", tentang_produk));
+            cmd.Parameters.Add(new SqlParameter("caraPakai", cara_pakai));
+            cmd.Parameters.Add(new SqlParameter("hargaProduk", harga_produk));
+            cmd.ExecuteNonQuery();
+            Console.WriteLine("Data Berhasil Ditambahkan");
         }
     }
 }
