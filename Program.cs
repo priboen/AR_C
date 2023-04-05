@@ -47,12 +47,87 @@ namespace AR_C
                                         Console.WriteLine("2. Tambah data Produk");
                                         Console.WriteLine("3. Hapus data Produk");
                                         Console.WriteLine("4. Keluar");
-                                        Console.Write("\nEnter your choice (1-3) : ");
+                                        Console.Write("\nEnter your choice (1-4) : ");
                                         char ch = Convert.ToChar(Console.ReadLine());
+                                        switch (ch)
+                                        {
+                                            case '1':
+                                                {
+                                                    Console.Clear();
+                                                    Console.WriteLine("Data Produk\n");
+                                                    Console.WriteLine();
+                                                    pr.baca(conn);
+                                                    conn.Close();
+                                                    Console.WriteLine("Tekan enter untuk melanjutkan.");
+                                                    Console.ReadLine();
+                                                }
+                                                break;
+                                            case '2':
+                                                {
+                                                    Console.Clear();
+                                                    Console.WriteLine("Input Data Produk\n");
+                                                    Console.Write("Masukkan ID Produk : ");
+                                                    string id_produk = Console.ReadLine();
+                                                    Console.Write("Masukkan Nama Produk : ");
+                                                    string nama_produk = Console.ReadLine();
+                                                    Console.Write("Masukkan Deskripsi Produk : ");
+                                                    string tentang_produk = Console.ReadLine();
+                                                    Console.Write("Masukkan Cara pakai Produk : ");
+                                                    string cara_pakai = Console.ReadLine();
+                                                    Console.Write("Masukkan Harga Produk : ");
+                                                    string harga_produk = Console.ReadLine();
+                                                    try
+                                                    {
+                                                        pr.insert(id_produk, nama_produk, tentang_produk, cara_pakai, harga_produk, conn);
+                                                        conn.Close();
+                                                    }
+                                                    catch
+                                                    {
+                                                        Console.WriteLine("\nAnda tidak memiliki akses untuk menambah data");
+                                                        Console.WriteLine("Tekan enter untuk melanjutkan.");
+                                                        Console.ReadLine();
+                                                    }
+                                                }
+                                                break;
+                                            case '3':
+                                                {
+                                                    Console.Clear();
+                                                    Console.WriteLine("Hapus Data Produk\n");
+                                                    Console.Write("Masukan Nama Produk : ");
+                                                    string nama_produk = Console.ReadLine();
+                                                    try
+                                                    {
+                                                        pr.delete(nama_produk, conn);
+                                                        conn.Close();
+                                                    }
+                                                    catch
+                                                    {
+                                                        Console.WriteLine("\nAnda tidak memiliki akses untuk menambah data");
+                                                        Console.WriteLine("Tekan enter untuk melanjutkan.");
+                                                        Console.ReadLine();
+                                                    }
+
+                                                }
+                                                break;
+                                            case '4':
+                                                {
+                                                    conn.Close();
+                                                    return;
+                                                }
+                                                default:
+                                                {
+                                                    Console.Clear();
+                                                    Console.WriteLine("\nInvalid option");
+                                                    Console.WriteLine("Tekan enter untuk melanjutkan.");
+                                                    Console.ReadLine();
+                                                }
+                                                break;
+                                        }
+
                                     }
                                     catch
                                     {
-
+                                        Console.WriteLine("\nCheck for the value entered.");
                                     }
                                 }
                             }
@@ -88,13 +163,12 @@ namespace AR_C
             }
         }
 
-        public void insert(string id_produk, string nama_produk, string tentang_produk, string cara_pakai, int harga_produk, SqlConnection con)
+        public void insert(string id_produk, string nama_produk, string tentang_produk, string cara_pakai, string harga_produk, SqlConnection con)
         {
             string str = "";
             str = "insert into dbo.Produk (id_produk, nama_produk, tentang_produk, cara_pakai, harga_produk)" + "values(@idProduk, @namaProduk, @tentangProduk, @caraPakai, @hargaProduk)";
             SqlCommand cmd = new SqlCommand(str, con);
             cmd.CommandType = CommandType.Text;
-
             cmd.Parameters.Add(new SqlParameter("idProduk", id_produk));
             cmd.Parameters.Add(new SqlParameter("namaProduk", nama_produk));
             cmd.Parameters.Add(new SqlParameter("tentangProduk", tentang_produk));
@@ -104,10 +178,10 @@ namespace AR_C
             Console.WriteLine("Data Berhasil Ditambahkan");
         }
 
-        public void delete(string id_produk, string nama_produk, string tentang_produk, string cara_pakai, int harga_produk, SqlConnection con)
+        public void delete(string nama_produk, SqlConnection con)
         {
             string str = "";
-            str = "delete from dbo.Produk where id_produk " + " = '" + id_produk + "'";
+            str = "delete from dbo.Produk where nama_produk " + " = '" + nama_produk + "'";
             SqlCommand cmd = new SqlCommand(str, con);
             cmd.ExecuteNonQuery();
             Console.WriteLine("Data Sudah berhasil dihapus.");
