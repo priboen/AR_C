@@ -39,7 +39,21 @@ namespace AR_C
                                 Console.Clear();
                                 while (true)
                                 {
+                                    try
+                                    {
+                                        Console.Clear();
+                                        Console.WriteLine("\nMenu");
+                                        Console.WriteLine("1. Melihat data Produk");
+                                        Console.WriteLine("2. Tambah data Produk");
+                                        Console.WriteLine("3. Hapus data Produk");
+                                        Console.WriteLine("4. Keluar");
+                                        Console.Write("\nEnter your choice (1-3) : ");
+                                        char ch = Convert.ToChar(Console.ReadLine());
+                                    }
+                                    catch
+                                    {
 
+                                    }
                                 }
                             }
                             default:
