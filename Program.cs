@@ -15,7 +15,17 @@ namespace AR_C
             Program pr = new Program();
             while (true)
             {
+                try
+                {
 
+                }
+                catch
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Tidak dapat mengakses database menggunakan user tersebut\n");
+                    Console.ResetColor();
+                }
             }
         }
 
