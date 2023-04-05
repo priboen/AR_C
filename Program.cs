@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AR_C
 {
-    internal class Program
+    class Program
     {
         static void Main(string[] args)
         {
