@@ -10,6 +10,11 @@ namespace AR_C
     {
         static void Main(string[] args)
         {
+            Program pr = new Program();
+            while (true)
+            {
+
+            }
         }
     }
 }
