@@ -17,6 +17,15 @@ namespace AR_C
             {
                 try
                 {
+                    Console.WriteLine("Koneksi Ke DataBase\n");
+                    Console.Write("Masukkan User ID : ");
+                    string user = Console.ReadLine();
+                    Console.Write("Masukkan Password : ");
+                    string pass = Console.ReadLine();
+                    Console.Write("Masukkan DataBase tujuan : ");
+                    string db = Console.ReadLine();
+                    Console.Write("\nKetik K untuk koneksi ke DataBase : ");
+                    char chr = Convert.ToChar(Console.ReadLine());
 
                 }
                 catch
@@ -27,6 +36,7 @@ namespace AR_C
                     Console.ResetColor();
                 }
             }
+
         }
 
         public void baca(SqlConnection con)
